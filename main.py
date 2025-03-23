@@ -37,22 +37,16 @@ TEXTS = [
 
 users = ('bob', 'ann', 'mike', 'liz')
 passwords = ['123', 'pass123', 'password123', 'pass123']
-
 separator = '-'*50
 
 # -------------
 
-print(users[0], passwords[0])
-
 # getting user's username and password
 
+print(separator)
 user_name = input ('username:')
 user_pass = input('password:') 
 print(separator)
-
-#user_name = 'bob'
-#user_pass = '123'
-
 
 # checking if user exists
 if user_name not in users:
@@ -68,7 +62,7 @@ if user_pass != passwords[index]:
 
 
 # App welcome
-print (f'''Welcome to the app, {user_name}
+print (f'''Welcome to the app, {user_name}.
 We have 3 texts to be analyzed.''')
 print(separator)
 
@@ -78,26 +72,26 @@ print(separator)
 
 # Check if selection is a number
 if not text_selection.isdigit():
-    print ('Selection needs to be a number, terminating program...')
+    print ('Selection needs to be a number in the range 1 to 3, terminating program...')
     exit ()
 # Check is the number is within the range
-elif int(text_selection) >3:
-    print ('Just numbers are allowed in the selection, terminating program...')
+elif int(text_selection) not in range (1,4) :
+    print ('Just numbers 1 to 3 are allowed in the selection, terminating program...')
     exit ()
 
+#selection of the actual text to analyze - from the original list of strings
 text_to_analyze = TEXTS[int(text_selection)-1]
 
 #removal of fullstops and commas
 text_to_analyze = text_to_analyze.replace(',','')
 text_to_analyze = text_to_analyze.replace('.','')
 
-print ('Text to analyze:')
-print (separator)
-print (text_to_analyze)
-print (separator)
 
-
-
+#printout of the text to analyze
+#print ('Text to analyze:')
+#print (separator)
+#print (text_to_analyze)
+#print (separator)
 
 
 # Determining word count of the text
@@ -105,18 +99,17 @@ word_count = len(text_to_analyze.split())
 print ('There are', word_count, 'words in the selected text.')
 print (separator)
 
-# Determining number of upper case words
+# Definition of individual counters
 
 uppercase_words=0
 lowercase_words=0
 titlecase_words=0
 numeric_string=0
 numeric_sum=0
-x=0
+#x=0  #auxiliary variable 
 
 # Splitting the selected text to list
 lst=text_to_analyze.split()
-
 
 
 # find count of titlecase, lowercase, uppercase words and number of digits 
@@ -125,12 +118,12 @@ for x in range (word_count):
         titlecase_words=titlecase_words+1   #counting titlecase words
         #print (lst[x-1])
     elif lst[x-1].isupper():
-        uppercase_words=uppercase_words+1   #counting uppercase words
+        uppercase_words = uppercase_words+1   #counting uppercase words
     elif lst[x-1].islower():
-        lowercase_words=lowercase_words+1   #counting lowercase words
+        lowercase_words = lowercase_words+1   #counting lowercase words
     elif lst[x-1].isdigit():
-        numeric_string=numeric_string+1     #counting numeric strings 
-        numeric_sum=numeric_sum + int(lst[x-1])   #counting sum of nummeric strings
+        numeric_string = numeric_string+1     #counting numeric strings 
+        numeric_sum = numeric_sum + int(lst[x-1])   #counting sum of nummeric strings
         
     
 
@@ -149,10 +142,7 @@ print ('The sum of all the numbers is: ', numeric_sum)
 new_list=[]
 
 for item in lst:
-    #print (item, len(item))
     new_list.append(len(item))
-
-# print (new_list)
 
 
 # find the length of the longest word
@@ -165,6 +155,9 @@ print (separator)
 print ('LEN|  OCCURENCES                |NR.')
 print (separator)
 
-for x in range (1,highest_number+1):
+for x in range(1,highest_number+1):
     stars = '*' * new_list.count(x)
-    print(x, ' |', stars, ' '* (25-new_list.count(x)),'|',new_list.count(x))
+    if x in range (1, 10):   # adjusting formatting of 1-9
+        print(x, ' |', stars, ' '* (25-new_list.count(x)),'|',new_list.count(x))
+    else:  # adjusting formatting of 10 and onwards
+        print(x, '|', stars, ' '* (25-new_list.count(x)),'|',new_list.count(x))
