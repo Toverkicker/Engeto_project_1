@@ -143,29 +143,28 @@ print (separator)
 print ('There are', numeric_string,'numeric strings.')
 print (separator)
 print ('The sum of all the numbers is: ', numeric_sum)
-print (separator)
-print ('LEN|  OCCURENCES  |NR.')
-
 
 
 # create new list made of lenghts of individual words in the analyzed text
 new_list=[]
 
 for item in lst:
-    print (item, len(item))
+    #print (item, len(item))
     new_list.append(len(item))
 
-print (new_list)
+# print (new_list)
 
 
 # find the length of the longest word
 highest_number = max(new_list)
-print (highest_number)
+#print (highest_number)
 
 
 #print the star bar table with number of occurences 
-print ('LEN|  OCCURENCES  |NR.')
+print (separator)
+print ('LEN|  OCCURENCES                |NR.')
+print (separator)
 
 for x in range (1,highest_number+1):
     stars = '*' * new_list.count(x)
-    print(x, ' |', stars,'|',new_list.count(x))
+    print(x, ' |', stars, ' '* (25-new_list.count(x)),'|',new_list.count(x))
